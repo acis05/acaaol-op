@@ -1,0 +1,18 @@
+[
+  {
+    "email": "demo@aca-aol.id",
+    "password_sha256": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+    "active": true,
+    "expires": "2026-12-31",
+    "customer_name": "Demo User",
+    "notes": "Akses demo SI - login email password"
+  },
+  {
+    "email": "demo2@aca-aol.id",
+    "password_sha256": "2926a2731f4b312c08982cacf8061eb14bf65c1a87cc5d70e864e079c6220731",
+    "active": true,
+    "expires": "2026-12-31",
+    "customer_name": "Demo User2",
+    "notes": "Akses demo SI - login email password"
+  }
+]

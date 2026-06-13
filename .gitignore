@@ -1,0 +1,15 @@
+# local secrets
+.env
+tokens.json
+licenses.local.json
+
+# python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/

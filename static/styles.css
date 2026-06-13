@@ -1,0 +1,1213 @@
+:root {
+  --bg: #07101d;
+  --bg-soft: #0b1526;
+  --card: rgba(10, 17, 30, 0.9);
+  --card-solid: #0f172a;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #f8fafc;
+  --muted: #a7b4c8;
+  --accent: #f59e0b;
+  --accent-strong: #d97706;
+  --accent-soft: rgba(245, 158, 11, 0.14);
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.12);
+  --danger: #ef4444;
+  --danger-soft: rgba(239, 68, 68, 0.12);
+  --info: #fb923c;
+  --info-soft: rgba(251, 146, 60, 0.12);
+  --shadow: 0 18px 55px rgba(0, 0, 0, 0.32);
+  --radius: 22px;
+  --radius-sm: 14px;
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-border: rgba(255, 255, 255, 0.09);
+}
+
+html[data-theme="clear"] {
+  --bg: #eef2f7;
+  --bg-soft: #f8fafc;
+  --card: rgba(255, 255, 255, 0.94);
+  --card-solid: #ffffff;
+  --card-border: rgba(15, 23, 42, 0.08);
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #f59e0b;
+  --accent-strong: #d97706;
+  --accent-soft: rgba(245, 158, 11, 0.1);
+  --success: #16a34a;
+  --success-soft: rgba(22, 163, 74, 0.1);
+  --danger: #dc2626;
+  --danger-soft: rgba(220, 38, 38, 0.1);
+  --info: #ea580c;
+  --info-soft: rgba(234, 88, 12, 0.1);
+  --shadow: 0 18px 45px rgba(15, 23, 42, 0.09);
+  --input-bg: #ffffff;
+  --input-border: rgba(15, 23, 42, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(245, 158, 11, 0.16), transparent 24%),
+    radial-gradient(circle at 90% 15%, rgba(251, 146, 60, 0.09), transparent 25%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visually-hidden {
+  display: none !important;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+/* ================= LOGIN ================= */
+
+.login-page {
+  min-height: 100vh;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: center;
+  padding: 34px 0;
+}
+
+.login-hero {
+  padding: 28px;
+}
+
+.brand-mark,
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+  flex: 0 0 auto;
+}
+
+.brand-title,
+.title {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.brand-subtitle,
+.subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.login-hero h1 {
+  max-width: 680px;
+  margin: 42px 0 16px;
+  font-size: clamp(38px, 6vw, 70px);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+}
+
+.login-hero p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.login-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.mini-card {
+  padding: 16px;
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.mini-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.mini-card span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.login-card {
+  position: relative;
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border-radius: 30px;
+  padding: 30px;
+  backdrop-filter: blur(14px);
+}
+
+.theme-pill {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.login-card-head {
+  margin: 28px 0 24px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.login-card h2 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: -0.04em;
+}
+
+.login-card p,
+.card-desc {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ================= APP LAYOUT ================= */
+
+.workspace {
+  width: min(1160px, calc(100% - 28px));
+  margin: 22px auto 32px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 16px 18px;
+  border-radius: calc(var(--radius) + 2px);
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-pill {
+  color: var(--muted);
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.span2 {
+  grid-column: span 2;
+}
+
+.welcome-card,
+.card,
+.footer {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.welcome-card {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+}
+
+.welcome-card h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: -0.045em;
+}
+
+.welcome-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.module-badge {
+  white-space: nowrap;
+  border: 1px solid rgba(245, 158, 11, 0.32);
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.card {
+  padding: 20px;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.step-num {
+  color: var(--accent);
+  font-weight: 900;
+  font-size: 12px;
+  margin-bottom: 4px;
+  letter-spacing: 0.1em;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+  white-space: nowrap;
+  font-weight: 800;
+}
+
+.badge.ok {
+  color: var(--success);
+  border-color: rgba(34, 197, 94, 0.32);
+  background: var(--success-soft);
+}
+
+.badge.fail {
+  color: var(--danger);
+  border-color: rgba(239, 68, 68, 0.32);
+  background: var(--danger-soft);
+}
+
+.badge.info {
+  color: var(--info);
+  border-color: rgba(251, 146, 60, 0.32);
+  background: var(--info-soft);
+}
+
+.row,
+.action-row,
+.action-stack {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.action-row {
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.action-stack {
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.field.compact {
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
+label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+input[type="file"],
+textarea {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 16px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text);
+  padding: 12px 14px;
+  font: inherit;
+  outline: none;
+  transition: 0.18s ease;
+}
+
+textarea {
+  min-height: 190px;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+input::placeholder {
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12);
+}
+
+select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.upload-box {
+  margin-top: 16px;
+  padding: 15px;
+  border: 1px dashed rgba(245, 158, 11, 0.34);
+  border-radius: 18px;
+  background: rgba(245, 158, 11, 0.055);
+}
+
+.upload-box input {
+  margin-bottom: 10px;
+}
+
+.upload-box span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.helper-note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #111827;
+  font-weight: 900;
+  font-size: 15px;
+  border-radius: 16px;
+  padding: 12px 18px;
+  min-height: 48px;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, opacity 0.14s ease, border-color 0.14s ease;
+  box-shadow: 0 10px 24px rgba(245, 158, 11, 0.18);
+}
+
+.btn.full {
+  width: 100%;
+}
+
+.btn.small {
+  min-height: 40px;
+  padding: 9px 13px;
+  font-size: 13px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn.ghost,
+.btn.subtle {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--card-border);
+  box-shadow: none;
+}
+
+.btn.subtle {
+  color: var(--muted);
+}
+
+.btn.ghost:hover,
+.btn.subtle:hover {
+  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.06);
+}
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.42;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.status-text,
+.summary-line {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.status-text.muted {
+  color: var(--muted);
+}
+
+.notify {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.notify.hidden {
+  display: none;
+}
+
+.notify.success {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: var(--success-soft);
+}
+
+.notify.error {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: var(--danger-soft);
+}
+
+.notify.info {
+  border-color: rgba(249, 115, 22, 0.35);
+  background: var(--info-soft);
+}
+
+.notify-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.notify-title {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+}
+
+.notify-close {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  opacity: 0.75;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 5px 8px;
+  border-radius: 10px;
+}
+
+.notify-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.notify-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.notify-list li {
+  margin: 4px 0;
+}
+
+.result-panel {
+  margin-top: 16px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.result-stat {
+  padding: 18px;
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.result-stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.result-stat strong {
+  display: block;
+  font-size: 34px;
+  letter-spacing: -0.05em;
+}
+
+.result-stat.ok {
+  border-color: rgba(34, 197, 94, 0.28);
+  background: var(--success-soft);
+}
+
+.result-stat.ok strong {
+  color: var(--success);
+}
+
+.result-stat.fail {
+  border-color: rgba(239, 68, 68, 0.28);
+  background: var(--danger-soft);
+}
+
+.result-stat.fail strong {
+  color: var(--danger);
+}
+
+.failure-note {
+  margin-top: 16px;
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  background: var(--danger-soft);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.note-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.note-head h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.note-head p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.log {
+  display: none;
+}
+
+.footer {
+  margin-top: 18px;
+  padding: 14px 18px;
+  color: var(--muted);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.28);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.42);
+}
+
+@media (max-width: 960px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    padding: 18px 0 28px;
+  }
+
+  .login-hero {
+    padding: 12px;
+  }
+
+  .login-hero h1 {
+    margin-top: 28px;
+  }
+
+  .login-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .span2 {
+    grid-column: span 1;
+  }
+
+  .topbar,
+  .welcome-card,
+  .note-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topbar-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .status-pill,
+  .topbar-actions .btn,
+  .action-row .btn,
+  .action-stack .btn,
+  .action-stack a.btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= OP SIZE FIX - PROFESSIONAL WIDE LAYOUT =================
+   Perbaikan tampilan agar dashboard Other Payment tidak terlalu kecil.
+   Aman ditempel di bawah CSS lama karena sifatnya override.
+========================================================================== */
+
+.workspace {
+  width: min(1380px, calc(100% - 56px));
+  margin: 28px auto 40px;
+}
+
+.login-page {
+  width: min(1320px, calc(100% - 56px));
+}
+
+.topbar {
+  padding: 20px 24px;
+  margin-bottom: 22px;
+}
+
+.dashboard-grid {
+  gap: 22px;
+}
+
+.welcome-card {
+  padding: 32px;
+}
+
+.welcome-card h1 {
+  font-size: clamp(36px, 3vw, 48px);
+}
+
+.welcome-card p {
+  font-size: 16px;
+}
+
+.card {
+  padding: 28px;
+}
+
+.card h2 {
+  font-size: 24px;
+}
+
+.card-desc {
+  font-size: 15px;
+}
+
+.step-num {
+  font-size: 13px;
+}
+
+.badge {
+  font-size: 13px;
+  padding: 8px 12px;
+}
+
+.status-pill {
+  font-size: 13px;
+  padding: 11px 14px;
+}
+
+.module-badge {
+  font-size: 14px;
+  padding: 11px 16px;
+}
+
+.action-row,
+.action-stack {
+  gap: 14px;
+}
+
+.field {
+  gap: 9px;
+}
+
+label {
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+input[type="file"],
+textarea {
+  min-height: 56px;
+  font-size: 15px;
+  padding: 14px 16px;
+}
+
+.upload-box {
+  padding: 20px;
+}
+
+.upload-box span,
+.helper-note,
+.status-text,
+.summary-line,
+.footer {
+  font-size: 14px;
+}
+
+.btn {
+  min-height: 54px;
+  padding: 14px 22px;
+  font-size: 16px;
+}
+
+.btn.small {
+  min-height: 44px;
+  padding: 10px 15px;
+  font-size: 14px;
+}
+
+.result-grid {
+  gap: 18px;
+}
+
+.result-stat {
+  padding: 22px;
+}
+
+.result-stat span {
+  font-size: 14px;
+}
+
+.result-stat strong {
+  font-size: 42px;
+}
+
+.failure-note {
+  padding: 20px;
+}
+
+.note-head h3 {
+  font-size: 20px;
+}
+
+.note-head p {
+  font-size: 14px;
+}
+
+textarea {
+  min-height: 230px;
+  font-size: 14px;
+}
+
+.footer {
+  margin-top: 22px;
+  padding: 16px 22px;
+}
+
+/* Layout lebih lega untuk layar besar */
+@media (min-width: 1280px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card {
+    min-height: 310px;
+  }
+
+  .card.span2 {
+    min-height: auto;
+  }
+}
+
+/* Layout tetap nyaman di laptop sedang */
+@media (max-width: 1180px) {
+  .workspace {
+    width: min(1180px, calc(100% - 36px));
+  }
+
+  .welcome-card h1 {
+    font-size: 34px;
+  }
+}
+
+/* Mobile tetap responsive */
+@media (max-width: 960px) {
+  .workspace,
+  .login-page {
+    width: min(100%, calc(100% - 24px));
+  }
+
+  .topbar,
+  .welcome-card,
+  .card,
+  .footer {
+    padding: 20px;
+  }
+
+  .welcome-card h1 {
+    font-size: 30px;
+  }
+
+  .card h2 {
+    font-size: 22px;
+  }
+}
+
+
+/* ================= FINAL OP WIDE UI FIX =================
+   Fixed untuk tampilan layar desktop agar tidak kecil.
+   Section ini sengaja berada paling bawah supaya override semua style lama.
+========================================================== */
+
+@media (min-width: 961px) {
+  .workspace {
+    width: calc(100vw - 80px) !important;
+    max-width: 1680px !important;
+    min-width: 1180px !important;
+    margin: 24px auto 44px !important;
+  }
+
+  .topbar,
+  .welcome-card,
+  .card,
+  .footer {
+    width: 100% !important;
+  }
+
+  .topbar {
+    padding: 24px 28px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .brand-dot {
+    width: 18px !important;
+    height: 18px !important;
+    box-shadow: 0 0 0 7px var(--accent-soft) !important;
+  }
+
+  .title,
+  .brand-title {
+    font-size: 30px !important;
+  }
+
+  .subtitle,
+  .brand-subtitle {
+    font-size: 15px !important;
+  }
+
+  .status-pill {
+    font-size: 14px !important;
+    padding: 12px 16px !important;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 26px !important;
+  }
+
+  .welcome-card {
+    padding: 38px !important;
+    min-height: 160px !important;
+  }
+
+  .welcome-card h1 {
+    font-size: clamp(46px, 3.7vw, 62px) !important;
+    line-height: 1 !important;
+  }
+
+  .welcome-card p {
+    font-size: 18px !important;
+    margin-top: 12px !important;
+  }
+
+  .module-badge {
+    font-size: 15px !important;
+    padding: 13px 18px !important;
+  }
+
+  .card {
+    padding: 34px !important;
+    min-height: 360px !important;
+  }
+
+  .card.span2 {
+    min-height: auto !important;
+  }
+
+  .card h2 {
+    font-size: 31px !important;
+    line-height: 1.1 !important;
+  }
+
+  .card-desc {
+    font-size: 17px !important;
+    line-height: 1.65 !important;
+    margin-top: 14px !important;
+  }
+
+  .step-num {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .badge {
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+  }
+
+  label {
+    font-size: 15px !important;
+  }
+
+  .field {
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select,
+  input[type="file"],
+  textarea {
+    min-height: 62px !important;
+    font-size: 17px !important;
+    padding: 16px 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .upload-box {
+    padding: 26px !important;
+    border-radius: 22px !important;
+    margin-top: 20px !important;
+  }
+
+  .upload-box input {
+    margin-bottom: 14px !important;
+  }
+
+  .upload-box span,
+  .helper-note,
+  .status-text,
+  .summary-line,
+  .footer {
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+  }
+
+  .btn {
+    min-height: 62px !important;
+    padding: 17px 28px !important;
+    font-size: 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .btn.small {
+    min-height: 48px !important;
+    padding: 12px 18px !important;
+    font-size: 15px !important;
+  }
+
+  .action-row,
+  .action-stack {
+    gap: 16px !important;
+    margin-top: 20px !important;
+  }
+
+  .result-panel {
+    margin-top: 24px !important;
+  }
+
+  .result-grid {
+    gap: 22px !important;
+  }
+
+  .result-stat {
+    padding: 28px !important;
+    border-radius: 22px !important;
+  }
+
+  .result-stat span {
+    font-size: 16px !important;
+  }
+
+  .result-stat strong {
+    font-size: 58px !important;
+  }
+
+  .failure-note {
+    margin-top: 24px !important;
+    padding: 26px !important;
+    border-radius: 22px !important;
+  }
+
+  .note-head h3 {
+    font-size: 26px !important;
+  }
+
+  .note-head p {
+    font-size: 15px !important;
+  }
+
+  textarea {
+    min-height: 270px !important;
+    font-size: 15px !important;
+  }
+
+  .notify {
+    margin-top: 22px !important;
+    padding: 20px 22px !important;
+    border-radius: 20px !important;
+  }
+
+  .notify-title {
+    font-size: 23px !important;
+  }
+
+  .notify-list {
+    font-size: 15px !important;
+  }
+
+  .footer {
+    margin-top: 26px !important;
+    padding: 18px 24px !important;
+  }
+}
+
+/* Laptop sedang tetap lebih besar, tidak mengecil ke 900-an px */
+@media (min-width: 961px) and (max-width: 1320px) {
+  .workspace {
+    width: calc(100vw - 44px) !important;
+    min-width: 0 !important;
+  }
+
+  .welcome-card h1 {
+    font-size: 42px !important;
+  }
+
+  .card {
+    padding: 28px !important;
+  }
+
+  .card h2 {
+    font-size: 26px !important;
+  }
+
+  .btn {
+    font-size: 16px !important;
+  }
+}

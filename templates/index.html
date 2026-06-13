@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ACA-AOL · Other Payment</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- LOGIN VIEW -->
+    <section id="loginView" class="login-page">
+      <div class="login-hero">
+        <div class="brand-mark">
+          <span class="brand-dot"></span>
+          <div>
+            <div class="brand-title">ACA-AOL</div>
+            <div class="brand-subtitle">Other Payment Importer</div>
+          </div>
+        </div>
+
+        <h1>Import Other Payment ke Accurate Online dengan lebih rapi.</h1>
+        <p>
+          Upload Excel, validasi transaksi, pilih database Accurate, lalu impor payment tanpa melihat detail teknis yang membingungkan.
+        </p>
+
+        <div class="login-highlights">
+          <div class="mini-card">
+            <strong>Excel Ready</strong>
+            <span>Template kolom sudah disiapkan</span>
+          </div>
+          <div class="mini-card">
+            <strong>OAuth Accurate</strong>
+            <span>Koneksi database aman</span>
+          </div>
+          <div class="mini-card">
+            <strong>Ringkasan Jelas</strong>
+            <span>Total sukses dan gagal langsung terlihat</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-card">
+        <button id="themeToggle" class="theme-pill" type="button">Dark / Clear</button>
+
+        <div class="login-card-head">
+          <div class="eyebrow">Akses Aplikasi</div>
+          <h2>Masuk ke ACA-AOL OP</h2>
+          <p>Gunakan email dan password yang sudah terdaftar.</p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="nama@email.com" autocomplete="username">
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+
+        <button id="btnLogin" class="btn full" type="button">Masuk</button>
+        <div id="loginStatus" class="status-text"></div>
+        <div id="customerInfo" class="status-text muted"></div>
+      </div>
+    </section>
+
+    <!-- APP VIEW -->
+    <section id="appView" class="workspace hidden">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-dot"></span>
+          <div>
+            <div class="title">ACA-AOL</div>
+            <div class="subtitle">Other Payment (Excel → Accurate)</div>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div id="aoStatus" class="status-pill">Memuat status...</div>
+          <button id="themeToggleApp" class="btn subtle small" type="button">Dark / Clear</button>
+          <button id="btnAppLogout" class="btn ghost small" type="button">Keluar</button>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+
+        <section class="welcome-card span2">
+          <div>
+            <div class="eyebrow">Dashboard</div>
+            <h1>Import Other Payment</h1>
+            <p>Ikuti 3 langkah: koneksi Accurate, upload Excel, lalu impor pembayaran kas/bank.</p>
+          </div>
+          <div class="module-badge">Module: Other Payment</div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <div>
+              <div class="step-num">01</div>
+              <h2>Koneksi Accurate</h2>
+            </div>
+            <span id="connectionBadge" class="badge neutral">Belum siap</span>
+          </div>
+
+          <p class="card-desc">Hubungkan akun Accurate dan pilih database tujuan.</p>
+
+          <div class="action-stack">
+            <a id="btnConnectAO" href="/oauth/start" class="btn">Connect Accurate</a>
+            <button id="btnLoadDb" class="btn ghost" type="button" disabled>Load Database</button>
+          </div>
+
+          <div class="field compact">
+            <label for="dbSelect">Database</label>
+            <select id="dbSelect">
+              <option value="">-- klik Load Database dulu --</option>
+            </select>
+          </div>
+
+          <div class="action-stack">
+            <button id="btnUseDb" class="btn ghost" type="button" disabled>Gunakan Database</button>
+            <button id="btnLogoutAO" class="btn subtle" type="button">Logout Accurate</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <div>
+              <div class="step-num">02</div>
+              <h2>Upload Excel</h2>
+            </div>
+            <span id="fileBadge" class="badge neutral">Belum ada file</span>
+          </div>
+
+          <p class="card-desc">Gunakan template agar nama kolom sesuai dengan format Other Payment.</p>
+
+          <div class="upload-box">
+            <input id="file" type="file" accept=".xlsx,.xls">
+            <span id="fileName">Belum ada file dipilih</span>
+          </div>
+
+          <div class="action-stack">
+            <a class="btn ghost" href="/api/template">Download Template</a>
+            <button id="btnResetFile" class="btn subtle" type="button">Reset File</button>
+          </div>
+
+          <div class="helper-note">
+            Header wajib minimal: <strong>TRANSDATE</strong>, <strong>BANKNO</strong>, <strong>PAYEE</strong>, <strong>ACCOUNTNO</strong>, <strong>AMOUNT</strong>, <strong>EXPENSENAME</strong>
+          </div>
+        </section>
+
+        <section class="card span2">
+          <div class="card-head">
+            <div>
+              <div class="step-num">03</div>
+              <h2>Validasi & Import</h2>
+            </div>
+            <span id="processBadge" class="badge neutral">Menunggu file</span>
+          </div>
+
+          <p class="card-desc">Sistem akan mengecek isi Excel, lalu menampilkan ringkasan sebelum dan sesudah impor.</p>
+
+          <div class="action-row">
+            <button id="btnBuild" class="btn ghost" type="button" disabled>Cek File</button>
+            <button id="btnImport" class="btn" type="button" disabled>Import ke Accurate</button>
+          </div>
+
+          <div id="summary" class="summary-line"></div>
+
+          <div id="resultPanel" class="result-panel hidden">
+            <div class="result-grid">
+              <div class="result-stat">
+                <span>Total Payment</span>
+                <strong id="statTotal">0</strong>
+              </div>
+              <div class="result-stat ok">
+                <span>Sukses</span>
+                <strong id="statSuccess">0</strong>
+              </div>
+              <div class="result-stat fail">
+                <span>Gagal</span>
+                <strong id="statFailed">0</strong>
+              </div>
+            </div>
+
+            <div id="failureNote" class="failure-note hidden">
+              <div class="note-head">
+                <div>
+                  <h3>Catatan gagal</h3>
+                  <p>Salin catatan ini untuk diperbaiki atau dikirim ke tim support.</p>
+                </div>
+                <button id="btnCopyFailures" class="btn ghost small" type="button">Copy Catatan</button>
+              </div>
+              <textarea id="failureText" readonly></textarea>
+            </div>
+          </div>
+
+          <div id="notifyBox" class="notify hidden">
+            <div class="notify-head">
+              <div id="notifyTitle" class="notify-title"></div>
+              <button id="notifyClose" class="notify-close" type="button" aria-label="Tutup notifikasi">✕</button>
+            </div>
+            <div id="notifyBody" class="notify-body"></div>
+          </div>
+
+          <pre id="log" class="log visually-hidden" aria-hidden="true"></pre>
+        </section>
+
+      </main>
+
+      <footer id="appFooter" class="footer">
+        <span>ACA-AOL Other Payment</span>
+        <span>·</span>
+        <span>Python Flask</span>
+        <span>·</span>
+        <span>Accurate Online</span>
+      </footer>
+    </section>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
