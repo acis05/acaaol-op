@@ -377,7 +377,7 @@ def build_other_payment_payload_from_df(df: pd.DataFrame):
     df = df.rename(columns=lambda c: normalize_column_name(c))
     df = df.fillna("")
 
-    required_cols = ["TRANSDATE", "BANKNO", "PAYEE", "ACCOUNTNO", "AMOUNT", "EXPENSENAME"]
+    required_cols = ["TRANSDATE", "BANKNO", "ACCOUNTNO", "AMOUNT", "EXPENSENAME"]
     for col in required_cols:
         if col not in df.columns:
             raise ValueError(f"Kolom wajib tidak ada: {col}")
@@ -394,9 +394,10 @@ def build_other_payment_payload_from_df(df: pd.DataFrame):
         if not bank_no:
             raise ValueError(f"Row {line_no}: BANKNO kosong")
 
+        # PAYEE tidak wajib. Jika kosong, gunakan DESCRIPTION / EXPENSENAME / "-" sebagai nama penerima.
         payee = str(row.get("PAYEE", "")).strip()
         if not payee:
-            raise ValueError(f"Row {line_no}: PAYEE kosong")
+            payee = str(row.get("DESCRIPTION", "")).strip() or str(row.get("EXPENSENAME", "")).strip() or "-"
 
         account_no = str(row.get("ACCOUNTNO", "")).strip()
         if not account_no:
