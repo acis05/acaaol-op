@@ -52,6 +52,41 @@ function setBadge(id, text, type = "neutral") {
   el.className = `badge ${type}`;
 }
 
+
+function formatLicenseDate(value) {
+  if (!value) return "-";
+  return String(value);
+}
+
+function saveLicenseInfo(info = {}) {
+  currentLicense = {
+    customer_name: info.customer_name || currentLicense?.customer_name || "-",
+    email: info.email || currentLicense?.email || currentUser || "-",
+    expires: info.expires ?? currentLicense?.expires ?? null,
+    max_databases: info.max_databases ?? currentLicense?.max_databases ?? 5,
+    used_databases: info.used_databases ?? currentLicense?.used_databases ?? 0,
+    allowed_databases: info.allowed_databases || currentLicense?.allowed_databases || []
+  };
+
+  sessionStorage.setItem("app_license", JSON.stringify(currentLicense));
+  renderLicenseInfo();
+}
+
+function renderLicenseInfo() {
+  const info = currentLicense || {};
+  const customer = info.customer_name || "-";
+  const email = info.email || currentUser || "-";
+  const expires = formatLicenseDate(info.expires);
+  const maxDb = info.max_databases || 5;
+  const usedDb = info.used_databases ?? (Array.isArray(info.allowed_databases) ? info.allowed_databases.length : 0);
+
+  setText("licenseOwner", `APLIKASI ACA-AOL INI TERDAFTAR ATAS NAMA ${customer}`);
+  setText("licenseEmail", `Email: ${email}`);
+  setText("licenseExpiry", `Masa berlaku: ${expires}`);
+  setText("licenseDbQuota", `Kuota database: ${usedDb}/${maxDb}`);
+}
+
+
 function showResultPanel(summary = {}, results = []) {
   const panel = $("resultPanel");
   if (panel) panel.classList.remove("hidden");
