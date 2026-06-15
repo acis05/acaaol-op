@@ -10,6 +10,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    .license-card {
+      display: flex;
+      justify-content: space-between;
+      gap: 22px;
+      align-items: center;
+      padding: 24px;
+      border: 1px solid rgba(245, 158, 11, .35);
+      background: linear-gradient(135deg, rgba(245, 158, 11, .12), rgba(15, 23, 42, .36));
+      border-radius: 24px;
+    }
+    .license-card h2 {
+      margin: 4px 0 0;
+      font-size: clamp(18px, 2vw, 28px);
+      line-height: 1.25;
+    }
+    .license-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .license-meta span {
+      padding: 10px 13px;
+      border: 1px solid rgba(148, 163, 184, .24);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, .34);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    @media (max-width: 900px) {
+      .license-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .license-meta {
+        justify-content: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="app-shell">
@@ -98,6 +139,18 @@
             <p>Ikuti 3 langkah: koneksi Accurate, upload Excel, lalu impor pembayaran kas/bank.</p>
           </div>
           <div class="module-badge">Module: Other Payment</div>
+        </section>
+
+        <section class="license-card span2">
+          <div class="license-main">
+            <div class="eyebrow">Lisensi Aktif</div>
+            <h2 id="licenseOwner">APLIKASI ACA-AOL INI TERDAFTAR ATAS NAMA -</h2>
+          </div>
+          <div class="license-meta">
+            <span id="licenseEmail">Email: -</span>
+            <span id="licenseExpiry">Masa berlaku: -</span>
+            <span id="licenseDbQuota">Kuota database: 0/5</span>
+          </div>
         </section>
 
         <section class="card">

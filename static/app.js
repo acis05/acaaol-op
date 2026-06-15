@@ -1,6 +1,8 @@
 let token = sessionStorage.getItem("app_token") || null;
 let selectedFile = null;
 let builtPayload = null;
+let currentUser = sessionStorage.getItem("app_user") || "";
+let currentLicense = JSON.parse(sessionStorage.getItem("app_license") || "null");
 let ao = {
   has_token: false,
   has_session: false,
@@ -187,6 +189,8 @@ function updateViewByLogin() {
   if ($("appView")) {
     $("appView").classList.toggle("hidden", !loggedIn);
   }
+
+  renderLicenseInfo();
 }
 
 function updateUI() {
@@ -247,8 +251,11 @@ function resetExcelState() {
 // ======================
 // HTTP helpers
 // ======================
-async function getJson(url) {
-  const r = await fetch(url);
+async function getJson(url, auth = false) {
+  const headers = {};
+  if (auth && token) headers["Authorization"] = `Bearer ${token}`;
+
+  const r = await fetch(url, { headers });
   const t = await r.text();
 
   let j;
@@ -328,13 +335,14 @@ async function postForm(url, formData) {
 
 async function fetchAoStatus() {
   try {
-    const st = await getJson("/api/ao-status");
+    const st = await getJson("/api/ao-status", true);
     ao = {
       has_token: !!st.has_token,
       has_session: !!st.has_session,
       db_id: st.db_id || null,
       db_alias: st.db_alias || null
     };
+    if (st.license) saveLicenseInfo(st.license);
   } catch {
     ao = {
       has_token: false,
@@ -377,10 +385,13 @@ if ($("btnLogin")) {
 
       const res = await postJson("/api/login", { email, password }, false);
       token = res.token;
+      currentUser = res.email || email || res.customer_name || "Login aktif";
       sessionStorage.setItem("app_token", token);
+      sessionStorage.setItem("app_user", currentUser);
+      saveLicenseInfo(res);
 
       if ($("customerInfo")) {
-        $("customerInfo").textContent = "Customer: " + (res.customer_name || "-") + (res.email ? " · " + res.email : "");
+        $("customerInfo").textContent = `APLIKASI ACA-AOL INI TERDAFTAR ATAS NAMA ${res.customer_name || "-"}`;
       }
 
       setText("loginStatus", "Login berhasil");
@@ -389,7 +400,11 @@ if ($("btnLogin")) {
       await fetchAoStatus();
     } catch (e) {
       token = null;
+      currentUser = "";
+      currentLicense = null;
       sessionStorage.removeItem("app_token");
+      sessionStorage.removeItem("app_user");
+      sessionStorage.removeItem("app_license");
       setText("loginStatus", "Login gagal: " + e.message);
 
       if ($("customerInfo")) {
@@ -415,7 +430,11 @@ if ($("btnLogin")) {
 if ($("btnAppLogout")) {
   $("btnAppLogout").onclick = () => {
     token = null;
+    currentUser = "";
+    currentLicense = null;
     sessionStorage.removeItem("app_token");
+    sessionStorage.removeItem("app_user");
+    sessionStorage.removeItem("app_license");
     resetExcelState();
     clearNotify();
     clearLog();
@@ -521,10 +540,11 @@ if ($("btnUseDb")) {
 
       if (!id) throw new Error("Pilih database dulu");
 
-      const res = await postJson("/api/open-db", { id, alias }, false);
+      const res = await postJson("/api/open-db", { id, alias }, true);
+      if (res.license) saveLicenseInfo(res.license);
 
       await fetchAoStatus();
-      showNotify("success", "Database aktif", renderSimpleMessage([`Database siap digunakan: ${alias || id}`]));
+      showNotify("success", "Database aktif", renderSimpleMessage([res.message || `Database siap digunakan: ${alias || id}`]));
     } catch (e) {
       showNotify("error", "Database gagal digunakan", renderSimpleMessage([e.message]));
     }
@@ -681,6 +701,9 @@ if ($("btnImport")) {
 // ======================
 window.addEventListener("load", async () => {
   token = sessionStorage.getItem("app_token") || null;
+  currentUser = sessionStorage.getItem("app_user") || "";
+  currentLicense = JSON.parse(sessionStorage.getItem("app_license") || "null");
+  renderLicenseInfo();
   updateUI();
   if (token) {
     await fetchAoStatus();

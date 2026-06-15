@@ -5,7 +5,9 @@
     "active": true,
     "expires": "2026-12-31",
     "customer_name": "Demo User",
-    "notes": "Akses demo SI - login email password"
+    "notes": "Akses demo OP - login email password",
+    "max_databases": 5,
+    "allowed_databases": []
   },
   {
     "email": "demo2@aca-aol.id",
@@ -13,6 +15,8 @@
     "active": true,
     "expires": "2026-12-31",
     "customer_name": "Demo User2",
-    "notes": "Akses demo SI - login email password"
+    "notes": "Akses demo OP - login email password",
+    "max_databases": 5,
+    "allowed_databases": []
   }
 ]
